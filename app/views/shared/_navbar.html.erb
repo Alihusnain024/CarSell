@@ -1,0 +1,10 @@
+<nav class="navbar">
+  <ul class="nav-list">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Favorites" %></li>
+    <li><%= link_to "My Posts" %></li>
+    <li><%= link_to "Post Ad" %></li>
+    <li>  <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+    </li>
+  </ul>
+</nav>

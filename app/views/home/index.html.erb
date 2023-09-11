@@ -1,0 +1,30 @@
+
+<div class="homepage">
+<% if user_signed_in? %>
+  <%= render 'shared/navbar' %> <!-- Display the navbar for logged-in users -->
+  <div class="home-container">
+<div>
+<div class="row">
+  <%= select_tag :dropdown1, options_for_select([["Option 1", "value1"], ["Option 2", "value2"], ["Option 3", "value3"]]) %>
+  <%= select_tag :dropdown2, options_for_select([["Option 4", "value4"], ["Option 5", "value5"], ["Option 6", "value6"]]) %>
+  <%= select_tag :dropdown3, options_for_select([["Option 7", "value7"], ["Option 8", "value8"], ["Option 9", "value9"]]) %>
+</div>
+<div class="row">
+  <%= select_tag :dropdown1, options_for_select([["Option 1", "value1"], ["Option 2", "value2"], ["Option 3", "value3"]]) %>
+  <%= select_tag :dropdown2, options_for_select([["Option 4", "value4"], ["Option 5", "value5"], ["Option 6", "value6"]]) %>
+  <%= select_tag :dropdown3, options_for_select([["Option 7", "value7"], ["Option 8", "value8"], ["Option 9", "value9"]]) %>
+</div>
+<div class="row">
+  <%= select_tag :dropdown1, options_for_select([["Option 1", "value1"], ["Option 2", "value2"], ["Option 3", "value3"]]) %>
+  <%= select_tag :dropdown2, options_for_select([["Option 4", "value4"], ["Option 5", "value5"], ["Option 6", "value6"]]) %>
+  <%= select_tag :dropdown3, options_for_select([["Option 7", "value7"], ["Option 8", "value8"], ["Option 9", "value9"]]) %>
+</div>
+
+<% else %>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+<% end %>
+
+
+</div>
+</div>
+
