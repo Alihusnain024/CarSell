@@ -1,6 +1,7 @@
 class Vehicle < ApplicationRecord
   belongs_to :user
   attr_accessor :form_step
+
   enum city: {
     rawalpindi: 'rawalpindi',
     lahore: 'lahore',

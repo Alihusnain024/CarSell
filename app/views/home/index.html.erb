@@ -6,19 +6,25 @@
 <div>
 <div class="row2">
 <%= select_tag :carModel, options_for_select([["suzuki", "suzuki"], ["toyota", "toyota"], ["honda", "honda"]]), include_blank: "Select Car Model" %>
-  <%= select_tag :dropdown2, options_for_select([["Option 4", "value4"], ["Option 5", "value5"], ["Option 6", "value6"]]) %>
-  <%= select_tag :dropdown3, options_for_select([["Option 7", "value7"], ["Option 8", "value8"], ["Option 9", "value9"]]) %>
+  <%= select_tag :city, options_for_select([["rawalpindi", "rawalpindi"], ["lahore", "lahore"], ["karachi", "karachi"], ["peshawar","peshawar"], ["islamabad","islamabad"]]), include_blank: "All Cities"  %>
+  <%= select_tag :price, options_for_select([["1000000", "price1"], ["2000000", "price2"], ["3000000", "price3"]]), include_blank: "Price range" %>
 </div>
 <div class="row2">
-  <%= select_tag :dropdown1, options_for_select([["Option 1", "value1"], ["Option 2", "value2"], ["Option 3", "value3"]]) %>
-  <%= select_tag :dropdown2, options_for_select([["Option 4", "value4"], ["Option 5", "value5"], ["Option 6", "value6"]]) %>
-  <%= select_tag :dropdown3, options_for_select([["Option 7", "value7"], ["Option 8", "value8"], ["Option 9", "value9"]]) %>
+  <%= select_tag :engineType, options_for_select([["petrol", "petrol"], ["diesel", "diesel"], ["hybrid", "hybrid"]]),include_blank: "Engine Details"  %>
+  <%= select_tag :transmissonType, options_for_select([["manual", "manual"], ["automatic", "automatic"]]), include_blank: "Transmission Type" %>
+  <%= select_tag :color, options_for_select([["black", "black"], ["white", "white"], ["gray", "gray"], ["silver", "silver"], ["red","red"]]),include_blank: "Color" %>
 </div>
 <div class="row2">
-  <%= select_tag :dropdown1, options_for_select([["Option 1", "value1"], ["Option 2", "value2"], ["Option 3", "value3"]]) %>
-  <%= select_tag :dropdown2, options_for_select([["Option 4", "value4"], ["Option 5", "value5"], ["Option 6", "value6"]]) %>
-  <%= select_tag :dropdown3, options_for_select([["Option 7", "value7"], ["Option 8", "value8"], ["Option 9", "value9"]]) %>
+  <%= select_tag :mileage, options_for_select([["10", "mileage1"], ["15", "mileage2"], ["20", "mileage3"]]) , include_blank: "mileage"%>
+  <%= select_tag :engineCapicity, options_for_select([["1.0L", "e1"], ["2.0L", "e2"], ["3.0L", "e3"]]), include_blank: "engine Capacity" %>
+  <%= select_tag :assemblyType, options_for_select([["local", "local"], ["imported", "imported"]]), include_blank: "Assembly Type" %>
 </div>
+<div class='d-flex justify-content-end'>
+    <button type="button" class="btn btn-primary m-1">Search</button>
+    <button type="button" class="btn btn-secondary m-1">Clear Filters</button>
+    </div>
+  
+
 
 <% else %>
   <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
@@ -29,11 +35,29 @@
 </div>
 
 <div class="list-container">
-<div>
-<div>
+<div class="card">
+  <div class="card-body">
+  <div class="d-flex" >
+    <img src="data:image/jpeg;base64,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" alt="Image Description" class="float-left mr-3" width="100" height="100">
+    <div class="card-info" >
+    <div class="d-flex justify-content-between">
+    <h5 class="card-title">Suzuki Wagon R</h5>
+    <p class="card-text">PKR 15.7 Lakh</p>
+    </div>
+    <p class="card-text">islambad</p>
+
+    <a href="#" class="btn btn-primary phone-button ">Show Phone No</a>
+
+    </div>
+    </div>
+  </div>
+  </div>
 </div>
-<div>
+
+
 </div>
-</div>
-</div>
+
+
+
+
 
