@@ -1,0 +1,36 @@
+<% if user_signed_in? %>
+  <%= render 'shared/navbar' %> 
+<div class="vehicle-container">
+<h1 class="post-ad">Post Ad</h1>
+</div>
+<div class="vehicle-wrapper">
+<div class="vehicle-form">
+
+<%= form_with(model: @vehicle, url: wizard_path) do |form| %>
+  
+
+<div class="row">
+  <div class="form-group">
+  <%= form.label :primaryContact %>
+  <%= form.text_field :primaryContact, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= form.label :secondaryContact %>
+  <%= form.text_field :secondaryContact, class: 'form-control' %>
+</div>
+</div>
+<div >
+
+<%= form.submit 'Submit', class: 'btn btn-primary' %>
+
+
+<% end %>
+</div>
+
+
+
+<div/>
+<% else %>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+<% end %>

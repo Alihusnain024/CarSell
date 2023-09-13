@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  city: MyString
+  mileage: 1
+  carModel: MyString
+  price: 1
+  engineType: MyString
+  transmissonType: MyString
+  engineCapicity: MyString
+  color: MyString
+  assemblyType: MyString
+  description: MyString
+  primaryContact: MyString
+  secondaryContact: MyString
+
+two:
+  city: MyString
+  mileage: 1
+  carModel: MyString
+  price: 1
+  engineType: MyString
+  transmissonType: MyString
+  engineCapicity: MyString
+  color: MyString
+  assemblyType: MyString
+  description: MyString
+  primaryContact: MyString
+  secondaryContact: MyString
