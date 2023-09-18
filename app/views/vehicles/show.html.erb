@@ -1,0 +1,91 @@
+<% if user_signed_in? %>
+  <%= render 'shared/navbar' %> 
+<div class="single-vehicle-container">
+<div class="single-vehicle">
+<h1><%= @vehicle.carModel %></h1>
+<h1><span>PKR:</span> <%= @vehicle.price %></h1>
+</div>
+</div>
+<div class='vehicle-details'>
+<div class="left">
+<div class="left-wrapper">
+<div class="left-container">
+<%= image_tag @vehicle.vehicle_image, size: '450x300'  %>
+
+</div>
+<div class="phone-wrapper">
+<button class="btn btn-primary" id="showPhoneBtn">
+  <i class="fas fa-phone"></i> Show Phone
+</button>
+
+<button class="btn btn-success">
+<i class="fas fa-envelope"></i> Send Message
+</button>
+</div>
+</div>
+
+</div>
+<div class="right">
+<div class="right-container">
+<div class='right-row'>
+<p>Car Model<p/>
+<p> <%=@vehicle.carModel %></p>
+</div>
+<hr>
+<div class='right-row'>
+<p>Assembly<p/>
+<p> <%=@vehicle.assemblyType %></p>
+</div>
+<hr>
+<div class='right-row'>
+<p>Engine Detail<p/>
+<p> <%=@vehicle.engineType %></p>
+</div>
+<hr>
+<div class='right-row'>
+<p>Engine Capaicty<p/>
+<p> <%=@vehicle.engineCapicity %></p>
+</div>
+<hr>
+<div class='right-row'>
+<p>Mileage<p/>
+<p> <%=@vehicle.mileage %></p>
+</div>
+<hr>
+<div class='right-row'>
+<p>Transmission Type<p/>
+<p> <%=@vehicle.transmissonType %></p>
+</div>
+<hr>
+<div class='right-row'>
+<p>Car Model<p/>
+<p> <%=@vehicle.carModel %></p>
+</div>
+<hr>
+
+
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="phone-number" style="display: none;"><%= @vehicle.primaryContact %></div>
+
+<% else %>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+<% end %>
+
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    // Get references to the phone number element and the Show Phone button
+    const phoneNumber = document.querySelector(".phone-number");
+    const showPhoneBtn = document.getElementById("showPhoneBtn");
+
+    // Add a click event listener to the Show Phone button
+    showPhoneBtn.addEventListener("click", function() {
+      // Display the phone number in a pop-up or modal (you can use your preferred method here)
+      alert("Phone Number: " + phoneNumber.textContent);
+    });
+  });
+</script>

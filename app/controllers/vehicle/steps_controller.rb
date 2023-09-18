@@ -21,6 +21,8 @@ class Vehicle::StepsController < ApplicationController
   	    [:city, :mileage, :carModel, :price,:engineType, :transmissonType, :engineCapicity, :color, :assemblyType, :description]
   	  when "step2"
   	    [:primaryContact, :secondaryContact]
+      when "step3"
+        [:vehicle_image]
   
   	  end
 

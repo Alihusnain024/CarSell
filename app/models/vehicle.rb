@@ -1,6 +1,20 @@
 class Vehicle < ApplicationRecord
   belongs_to :user
   attr_accessor :form_step
+  has_one_attached :vehicle_image
+  include PgSearch::Model
+
+  multisearchable against: [:carModel, :city, :price, :engineType, :transmissonType, :color, :mileage, :engineCapicity, :assemblyType]
+
+  def self.search_all(query_params)
+    debugger
+    vehicles = Vehicle.all
+    if query_params && query_params[:query].present?
+      vehicles = vehicles.search(query_params[:query])
+    end
+    vehicles
+  end
+  
 
   enum city: {
     rawalpindi: 'rawalpindi',
@@ -34,7 +48,7 @@ class Vehicle < ApplicationRecord
   }
 
   cattr_accessor :form_steps do
-  	%w(step1 step2)
+  	%w(step1 step2 step3) 
   end
   def required_for_step?(step)
     # All fields are required if no form step is present
@@ -49,6 +63,10 @@ class Vehicle < ApplicationRecord
 
     validates :primaryContact, :secondaryContact, presence: true,
   if: -> { required_for_step?(:step2) }
+
+    validates :vehicle_image, presence: true,
+    if: -> { required_for_step?(:step3) }
+
 
  
 end

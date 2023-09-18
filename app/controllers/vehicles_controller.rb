@@ -1,10 +1,8 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   
-
-
   def index
-   @pagy, @vehicles = pagy(current_user.vehicles.where.not(primaryContact: nil), items:5)
+   @pagy, @vehicles = pagy(current_user.vehicles.where.not(primaryContact: nil), items:3)
   end
 
   def show
@@ -37,11 +35,25 @@ class VehiclesController < ApplicationController
     redirect_to vehicles_url, notice: 'Vehicle was successfully destroyed.'
   end
 
+  def search
+
+    if params[:query_params].present?
+
+     @pagy, @results = pagy(Vehicle.where(id: PgSearch.multisearch(params[:query_params].values.reject(&:blank?)).pluck(:searchable_id)), items:3)
+    else
+      @pagy, @results = pagy(Vehicle.all.where.not(primaryContact: nil),items:3)
+    end
+    puts "#{@results}"
+    render :search 
+  end
+
   private
 
   def set_vehicle
     @vehicle = Vehicle.find(params[:id])
   end
+
+ 
 
   def vehicle_params
     params.require(:vehicle).permit(
@@ -56,7 +68,10 @@ class VehiclesController < ApplicationController
       :assemblyType, 
       :description, 
       :primaryContact, 
-      :secondaryContact
+      :secondaryContact,
+      :vehicle_image
     )
   end
+
+ 
 end

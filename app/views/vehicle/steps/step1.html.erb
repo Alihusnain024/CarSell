@@ -1,8 +1,6 @@
 <% if user_signed_in? %>
   <%= render 'shared/navbar' %> 
-  <div class="vehicle-container">
-    <h1 class="post-ad">Post Ad</h1>
-  </div>
+ 
   <div class="vehicle-wrapper">
     <div class="vehicle-form">
       <%= form_with(model: @vehicle, url: wizard_path) do |form| %>
@@ -11,36 +9,49 @@
             <%= form.label :city %>
             <%= form.select :city, ['lahore', 'rawalpindi', 'quetta', 'karachi', 'peshawar', 'islamabad'], prompt: 'Select City' %>
             <% if @vehicle.errors[:city].any? %>
-              <div class="field-error"><%= @vehicle.errors[:city].join(", ") %></div>
-            <% end %>
-            
+              <div class="text-danger"><%= "City" + @vehicle.errors[:city].join(", ") %></div>
+            <% end %>  
           </div>
-
           <div class="form-group">
             <%= form.label :carModel %>
             <%= form.select :carModel, ['suzuki', 'toyota', 'honda', 'bmv'], prompt: 'Select Car Model' %>
+            <% if @vehicle.errors[:carModel].any? %>
+              <div class="text-danger"><%= "car model" + @vehicle.errors[:carModel].join(", ") %></div>
+            <% end %>  
           </div>
         </div>
         <div class="row1">
           <div class="form-group">
             <%= form.label :color %>
             <%= form.select :color, ['black', 'white', 'gray', 'silver', 'red'], prompt: 'Select Color' %>
+            <% if @vehicle.errors[:color].any? %>
+              <div class="text-danger"><%= "color" + @vehicle.errors[:color].join(", ") %></div>
+            <% end %>  
           </div>
 
           <div class="form-group">
             <%= form.label :engineCapicity %>
             <%= form.select :engineCapicity, ['1.0L', '1.5L', '2.0L', '2.5L'], prompt: 'Select Engine Capacity' %>
+            <% if @vehicle.errors[:engineCapicity].any? %>
+              <div class="text-danger"><%= "engine capacity" + @vehicle.errors[:engineCapicity].join(", ") %></div>
+            <% end %>  
           </div>
         </div>
         <div class="row1">
           <div class="form-group">
             <%= form.label :engineType %>
             <%= form.select :engineType, ['petrol', 'diesel', 'hybrid'], prompt: 'Select Engine Type' %>
+            <% if @vehicle.errors[:engineType].any? %>
+              <div class="text-danger"><%= "engine type" + @vehicle.errors[:engineType].join(", ") %></div>
+            <% end %>  
           </div>
 
           <div class="form-group">
             <%= form.label :transmissonType %>
             <%= form.select :transmissonType, ['Manual', 'Automatic'], prompt: 'Select Transmission Type' %>
+            <% if @vehicle.errors[:transmissonType].any? %>
+              <div class="text-danger"><%= "transmission type" + @vehicle.errors[:transmissonType].join(", ") %></div>
+            <% end %>  
           </div>
         </div>
 
@@ -48,11 +59,17 @@
           <div class="form-group">
             <%= form.label :mileage %>
             <%= form.text_field :mileage, class: 'form-control h-40' %>
+            <% if @vehicle.errors[:mileage].any? %>
+              <div class="text-danger"><%= "mileage" + @vehicle.errors[:mileage].join(", ") %></div>
+            <% end %>  
           </div>
 
           <div class="form-group">
             <%= form.label :price %>
             <%= form.text_field :price, class: 'form-control h-40' %>
+            <% if @vehicle.errors[:price].any? %>
+              <div class="text-danger"><%= "price" + @vehicle.errors[:price].join(", ") %></div>
+            <% end %>  
           </div>
         </div>
         <div>
@@ -60,11 +77,17 @@
             <div class="form-group">
               <%= form.label :assemblyType %>
               <%= form.select :assemblyType, ['local', 'imported'], prompt: 'Select Assembly Type' %>
+              <% if @vehicle.errors[:assemblyType].any? %>
+                <div class="text-danger"><%= "assembly type" + @vehicle.errors[:assemblyType].join(", ") %></div>
+              <% end %>  
             </div>
 
             <div class="form-group">
               <%= form.label :description %>
               <%= form.text_area :description, rows: 4 %>
+              <% if @vehicle.errors[:description].any? %>
+                <div class="text-danger"><%= "description" + @vehicle.errors[:description].join(", ") %></div>
+              <% end %>  
             </div>
           </div>
 
