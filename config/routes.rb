@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'favourites/index'
   devise_for :users
   root to: "vehicles#search"
   resources :vehicles do 
@@ -7,9 +6,12 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    member do
+      put 'close'
+    end
   end
 
-  resources :favorites, only: [:index, :create, :destroy] do
+  resources :favourites, only: [:index, :create, :destroy] do
     member do
       post 'add_to_favorites'
       delete 'remove_from_favorites'

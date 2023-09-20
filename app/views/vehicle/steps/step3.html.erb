@@ -1,29 +1,63 @@
 <% if user_signed_in? %>
-  <%= render 'shared/navbar' %> 
+  <%= render 'shared/navbar' %>
 
-<div class="vehicle-wrapper">
-<div class="vehicle-form">
+  <div class="vehicle-wrapper">
+    <div class="vehicle-form">
+    <div class="status-bar">
+    <div class="step <%= wizard_steps.index(step) == 0 ? 'active' : '' %>">Vehicle Details</div>
+    <div class="step <%= wizard_steps.index(step) == 1 ? 'active' : '' %>">Contact Details</div>
+    <div class="step <%= wizard_steps.index(step) == 2 ? 'active' : '' %>">Vehicle Images</div>
+  </div>
+      <%= form_with(model: @vehicle, url: wizard_path) do |form| %>
 
-<%= form_with(model: @vehicle, url: wizard_path) do |form| %>
-  
+        <div class="row">
+          <div class="form-group">
+            <%= form.label :vehicle_image %>
+            <%= form.file_field :vehicle_image, class: 'image-upload' %>
+            <div class="image-preview">
+              <img id="image-preview" src="#" alt="Selected Image" style="display: none;">
+              <span class="remove-image" style="display: none;">&times;</span>
+            </div>
+          </div>
+        </div>
+        <div>
+        <%= link_to 'Back', previous_wizard_path, class: 'btn btn-secondary' %>
+          <%= form.submit 'Submit', class: 'btn btn-primary' %>
+        </div>
 
-<div class="row">
-  <div class="form-group">
-  <%= form.label :vehicle_image %>
-  <%= form.file_field :vehicle_image %>
-</div>
-</div>
-<div >
+      <% end %>
+    </div>
+  </div>
 
-<%= form.submit 'Submit', class: 'btn btn-primary' %>
+  <script>
+    document.querySelector('.image-upload').addEventListener('change', function() {
+      const imagePreview = document.getElementById('image-preview');
+      const removeImage = document.querySelector('.remove-image');
 
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
 
-<% end %>
-</div>
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+          removeImage.style.display = 'block';
+        };
 
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
 
+    document.querySelector('.remove-image').addEventListener('click', function() {
+      const imagePreview = document.getElementById('image-preview');
+      const removeImage = document.querySelector('.remove-image');
+      const imageUpload = document.querySelector('.image-upload');
 
-<div/>
+      imagePreview.style.display = 'none';
+      removeImage.style.display = 'none';
+      imageUpload.value = ''; 
+    });
+  </script>
+
 <% else %>
-  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
 <% end %>

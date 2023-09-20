@@ -1,8 +1,13 @@
 <% if user_signed_in? %>
   <%= render 'shared/navbar' %> 
- 
   <div class="vehicle-wrapper">
     <div class="vehicle-form">
+    <div class="status-bar">
+  <div class="step <%= wizard_steps.index(step) == 0 ? 'active' : '' %>">Vehicle Details</div>
+  <div class="step <%= wizard_steps.index(step) == 1 ? 'active' : '' %>">Contact Details</div>
+  <div class="step <%= wizard_steps.index(step) == 2 ? 'active' : '' %>">Vehicle Images</div>
+   </div>
+
       <%= form_with(model: @vehicle, url: wizard_path) do |form| %>
         <div class="row1">
           <div class="form-group">

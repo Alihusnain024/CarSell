@@ -15,6 +15,8 @@ gem 'puma', '~> 5.0'
 gem 'wicked'
 # Pegy Gem
 gem 'pagy'
+# Letter Opener
+gem "letter_opener", group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

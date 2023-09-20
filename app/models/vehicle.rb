@@ -1,7 +1,8 @@
 class Vehicle < ApplicationRecord
+  enum status: {open: 0, close: 1}
   belongs_to :user
   attr_accessor :form_step
-  has_one_attached :vehicle_image
+  has_many_attached :vehicle_image
   include PgSearch::Model
 
   multisearchable against: [:carModel, :city, :price, :engineType, :transmissonType, :color, :mileage, :engineCapicity, :assemblyType]

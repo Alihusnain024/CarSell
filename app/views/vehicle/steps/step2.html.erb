@@ -1,34 +1,32 @@
 <% if user_signed_in? %>
-  <%= render 'shared/navbar' %> 
-
-<div class="vehicle-wrapper">
-<div class="vehicle-form">
-
-<%= form_with(model: @vehicle, url: wizard_path) do |form| %>
-  
-
-<div class="row">
-  <div class="form-group">
-  <%= form.label :primaryContact %>
-  <%= form.text_field :primaryContact, class: 'form-control' %>
+  <%= render 'shared/navbar' %>
+  <div class="vehicle-wrapper">
+    <div class="vehicle-form">
+    <div class="status-bar">
+  <div class="step <%= wizard_steps.index(step) == 0 ? 'active' : '' %>">Vehicle Details</div>
+  <div class="step <%= wizard_steps.index(step) == 1 ? 'active' : '' %>">Contact Details</div>
+  <div class="step <%= wizard_steps.index(step) == 2 ? 'active' : '' %>">Vehicle Images</div>
 </div>
 
-<div class="form-group">
-  <%= form.label :secondaryContact %>
-  <%= form.text_field :secondaryContact, class: 'form-control' %>
-</div>
-</div>
-<div >
+      <%= form_with(model: @vehicle, url: wizard_path) do |form| %>
+        <div class="row">
+          <div class="form-group">
+            <%= form.label :primaryContact %>
+            <%= form.text_field :primaryContact, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :secondaryContact %>
+            <%= form.text_field :secondaryContact, class: 'form-control' %>
+          </div>
+        </div>
+        <div>
+        <%= link_to 'Back', previous_wizard_path, class: 'btn btn-secondary' %>
+          <%= form.submit 'next', class: 'btn btn-primary' %>  
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<%= form.submit 'next', class: 'btn btn-primary' %>
-
-
-<% end %>
-</div>
-
-
-
-<div/>
 <% else %>
-  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
 <% end %>
