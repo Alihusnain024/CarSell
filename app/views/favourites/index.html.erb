@@ -1,21 +1,17 @@
-<% if user_signed_in? %>
-  <%= render 'shared/navbar' %> 
-<div >
-<div class="favorite-title">
-<h1 style="text-align: center;">My Favourites Vehicles</h1>
-</div>
-</div>
-<ul>
-  <% @favorite_vehicles.each do |favorite| %>
-    <div class="card">
-  <div class="card-body d-flex justify-content-between">
-  <h5 class="card-title"><%= favorite.vehicle.carModel %></h5>
-    <p class="card-text"><%= favorite.vehicle.price%> PKR</p>
+<div>
+  <div class="favorite-title">
+    <h1 style="text-align: center;">My Favourite Vehicles</h1>
   </div>
 </div>
+<div class="card-container">
+  <% @favorite_vehicles.each do |favorite| %>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag favorite.vehicle.vehicle_image.first, size: '287x150', style: 'object-fit: cover;' %>
+      <div class="card-body">
+        <h5 class="card-title"><%= favorite.vehicle.carModel %></h5>
+        <p class="card-text"><%= favorite.vehicle.price %> PKR</p>
+        <i class="bi bi-heart-fill"></i>
+        </div>
+    </div>
   <% end %>
-</ul>
-
-<% else %>
-  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
-<% end %>
+</div>

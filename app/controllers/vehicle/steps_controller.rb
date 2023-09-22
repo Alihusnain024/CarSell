@@ -22,7 +22,7 @@ class Vehicle::StepsController < ApplicationController
   	  when "step2"
   	    [:primaryContact, :secondaryContact]
       when "step3"
-        [:vehicle_image]
+        [:vehicle_image =>[]]
   
   	  end
 

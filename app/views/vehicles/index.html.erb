@@ -1,6 +1,4 @@
-<% if user_signed_in? %>
-  <%= render 'shared/navbar' %>
-  <div class="posts">
+<div class="posts">
     <% @vehicles.each do |vehicle| %>
       <div class="list-container">
         <div class="card">
@@ -18,17 +16,15 @@
               <% if vehicle.status == 'open' %>
                 <%= link_to 'Close', close_vehicle_path(vehicle), method: :put, class: 'btn btn-warning', data: { confirm: 'Are you sure you want to close this vehicle?' } %>
               <% else %>
-                <%= link_to 'Close', '#', class: 'btn btn-secondary', disabled: true, title: 'This vehicle is already closed' %>
+                <%= link_to 'Closed', '#', class: 'btn btn-secondary', disabled: true, title: 'This vehicle is already closed' %>
               <% end %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
-  </div>
-  
-  <div class="pagy_nav_bootstrap" style="margin-left: 650px; margin-top:30px"><%== pagy_bootstrap_nav(@pagy).html_safe %></div>
+</div>
 
-<% else %>
-  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
-<% end %>
+<div class="pagy_nav_bootstrap" style="margin-left: 650px; margin-top:30px"><%== pagy_bootstrap_nav(@pagy).html_safe %></div>
+
+

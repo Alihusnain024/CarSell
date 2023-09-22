@@ -1,5 +1,6 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:search]  
   
   def index
    @pagy, @vehicles = pagy(current_user.vehicles.where.not(primaryContact: nil), items:3)
@@ -40,19 +41,11 @@ class VehiclesController < ApplicationController
   
 
   def search
-    begin
       if params[:query_params].present?
         @pagy, @results = pagy(Vehicle.where(id: PgSearch.multisearch(params[:query_params].values.reject(&:blank?)).pluck(:searchable_id)), items: 3)
       else
         @pagy, @results = pagy(Vehicle.all.where.not(primaryContact: nil).where(status: "open"), items: 3)
       end
-    rescue StandardError => e
-      flash[:alert] = "An error occurred while processing your request."
-      Rails.logger.error("Error in VehiclesController#search: #{e.message}")
-      @pagy = nil
-      @results = []
-    end
-  
     render :search
   end
 
@@ -86,5 +79,5 @@ class VehiclesController < ApplicationController
       vehicle_image: []
     )
   end
-  
+
 end

@@ -1,5 +1,8 @@
 class Vehicle < ApplicationRecord
-  enum status: {open: 0, close: 1}
+  enum status: {
+    open: 0,
+    close: 1
+  }
   belongs_to :user
   attr_accessor :form_step
   has_many_attached :vehicle_image

@@ -1,4 +1,7 @@
 class FavouritesController < ApplicationController
+
+  before_action :authenticate_user!
+
   def index
     @favorite_vehicles = current_user.favorites.includes(:vehicle).where(vehicles: { status: 'open' })
   end
