@@ -3,7 +3,7 @@ class FavouritesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favorite_vehicles = current_user.favorites.includes(:vehicle).where(vehicles: { status: 'open' })
+   @pagy,@favorite_vehicles = pagy(current_user.favorites.includes(:vehicle).where(vehicles: { status: 'open' }),items:4)
   end
 
   def add_to_favorites

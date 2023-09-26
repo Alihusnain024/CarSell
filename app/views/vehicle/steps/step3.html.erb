@@ -1,16 +1,13 @@
 <div class="vehicle-wrapper">
   <div class="vehicle-form" data-controller="vehicle-form">
     <%= render "shared/statusbar" %>
-    <%= form_with(model: @vehicle, url: wizard_path, html: { id: 'vehicle-form', "data-action": "vehicle-form#onSubmit" }) do |form| %>
+    <%= form_with(model: @vehicle, url: wizard_path, html: { id: 'vehicle-form', enctype: 'multipart/form-data' }) do |form| %>
       <div class="row">
         <div class="form-group">
           <%= form.label :vehicle_image %>
-          <%= form.file_field :vehicle_image, class: 'image-upload', multiple: true, "data-action": "vehicle-form#onImageChange" %>
-          <div class="image-preview">
-            <img id="image-preview" src="#" alt="Selected Image" style="display: none;">
-            <span class="remove-image" style="display: none;" data-action="vehicle-form#onRemoveImage">&times;</span>
+          <%= form.file_field :vehicle_image, id: 'image-upload', multiple: true %>
+          <div id="image-preview-container" style="display: flex; flex-wrap: wrap; margin-top: 40px"></div>
           </div>
-        </div>
       </div>
       <div>
         <%= link_to 'Back', previous_wizard_path, class: 'btn btn-secondary' %>
@@ -19,3 +16,23 @@
     <% end %>
   </div>
 </div>
+
+<div class="modal fade" id="imageLimitModal" tabindex="-1" role="dialog" aria-labelledby="imageLimitModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageLimitModalLabel">Image Limit Exceeded</h5>
+        <button type="button" class="close" data-dismiss="modal" id="close-Modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You can select a maximum of 5 images.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+

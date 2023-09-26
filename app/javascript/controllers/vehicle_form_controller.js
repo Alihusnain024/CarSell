@@ -1,46 +1,72 @@
-
+// Import Stimulus
 import { Controller } from "stimulus";
 
 export default class extends Controller {
   connect() {
-    this.imageUpload = this.element.querySelector('.image-upload');
-    this.imagePreview = document.getElementById('image-preview');
-    this.removeImage = document.querySelector('.remove-image');
-    this.submitButton = document.querySelector('#submit-button');
+    const imageUpload = this.element.querySelector("#image-upload");
+    const imagePreviewContainer = this.element.querySelector("#image-preview-container");
+    const submitButton = this.element.querySelector("#submit-button");
 
-    this.imageUpload.addEventListener('change', this.onImageChange.bind(this));
-    this.removeImage.addEventListener('click', this.onRemoveImage.bind(this));
+    imageUpload.addEventListener("change", () => {
+      imagePreviewContainer.innerHTML = "";
+
+      const files = Array.from(imageUpload.files);
+      const maxImages = 5;
+
+      if (files.length > maxImages) {
+        $(imageLimitModal).modal("show");
+        this.hideModal();
+        imageUpload.value = "";
+        submitButton.disabled = true;
+        return;
+      }
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imagePreview = document.createElement("div");
+          imagePreview.classList.add("image-preview-item");
+          imagePreview.innerHTML = `
+            <img src="${e.target.result}" alt="Selected Image">
+            <span class="remove-image" data-file="${file.name}">&times;</span>
+          `;
+          imagePreviewContainer.appendChild(imagePreview);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      submitButton.disabled = false;
+    });
+
+    imagePreviewContainer.addEventListener("click", (e) => {
+      if (e.target.classList.contains("remove-image")) {
+        const fileName = e.target.getAttribute("data-file");
+        const files = Array.from(imageUpload.files);
+        const updatedFiles = files.filter((file) => file.name !== fileName);
+
+        if (updatedFiles.length === 0) {
+          submitButton.disabled = true;
+        }
+        const newFileList = new DataTransfer();
+        updatedFiles.forEach((file) => {
+          newFileList.items.add(file);
+        });
+
+        imageUpload.files = newFileList.files;
+
+        e.target.parentElement.remove();
+      }
+    });
   }
 
-  onImageChange() {
-    if (this.imageUpload.files && this.imageUpload.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.imagePreview.src = e.target.result;
-        this.imagePreview.style.display = 'block';
-        this.removeImage.style.display = 'block';
-        this.submitButton.disabled = false;
-      };
-      reader.readAsDataURL(this.imageUpload.files[0]);
-    } else {
-      // Handle the case when the user cancels the image selection
-      this.imagePreview.style.display = 'none';
-      this.removeImage.style.display = 'none';
-      this.submitButton.disabled = true;
-    }
+  hideModal(){
+    $('#closeModal').click(function(){
+    $('#imageLimitModal').modal('hide') 
+
+    })
+     $('#close-Modal').click(function(){
+      $('#imageLimitModal').modal('hide') 
+
+    })
   }
 
-  onRemoveImage() {
-    this.imagePreview.style.display = 'none';
-    this.removeImage.style.display = 'none';
-    this.imageUpload.value = ''; // Clear the file input
-    this.submitButton.disabled = true;
-  }
-
-  onSubmit(event) {
-    if (!this.imageUpload.files.length) {
-      event.preventDefault();
-      alert('Please select an image before submitting.');
-    }
-  }
 }

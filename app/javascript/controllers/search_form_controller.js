@@ -1,4 +1,3 @@
-// search_form_controller.js
 
 import { Controller } from "stimulus";
 
@@ -11,7 +10,6 @@ export default class extends Controller {
   }
   toggleFilters() {
     this.expanded = !this.expanded;
-
     const filterRows = document.getElementById("filterRows");
 
     if (this.expanded) {
