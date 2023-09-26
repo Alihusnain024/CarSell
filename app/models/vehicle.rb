@@ -6,6 +6,7 @@ class Vehicle < ApplicationRecord
   belongs_to :user
   attr_accessor :form_step
   has_many_attached :vehicle_image
+  
   include PgSearch::Model
 
   multisearchable against: [:carModel, :city, :price, :engineType, :transmissonType, :color, :mileage, :engineCapicity, :assemblyType]
@@ -34,6 +35,7 @@ class Vehicle < ApplicationRecord
     honda: 'honda',
     bmw: 'bmv'
   }
+ 
   enum engineType: {
     petrol: 'petrol',
     diesel: 'diesel',

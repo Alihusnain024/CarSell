@@ -24,7 +24,7 @@
   flex-direction: row;
 }
 .vehicle-form{
-  height: 600px;
+  height: 650px;
   width: 50%;
   background-color: white;
   padding: 10px;
@@ -32,7 +32,7 @@
   margin-top: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  margin-top: 120px;
+  margin-top: 80px;
   
 }
 
@@ -87,7 +87,7 @@
 .form-group select option:first-child {
   color: #aaa;
 }
-.form-control{
+.form-control1{
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -131,6 +131,7 @@ justify-content: space-around;
 }
 .vehicle-details{
   display: flex;
+  margin-top: 70px;
 }
 .left{
   height: 80vh;
@@ -145,8 +146,18 @@ justify-content: space-around;
 
 }
 .right-container{
-  height: 500px;
-  width: 500px;
+  height: 300px;
+  width: 300px;
+  background-color: white;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+.right-container1{
+  height: 270px;
+  width: 300px;
   background-color: white;
   margin: auto;
   margin-top: 20px;
@@ -175,12 +186,14 @@ p{
 }
 
 .left-container{
-  height: 400px;
-  width: 500px;
+  height: 450px;
+  width: 80%;
   background-color: white;
   margin: auto;
   margin-top: 20px;
   padding: 20px;
+  margin-left: 170px;
+
   margin-bottom: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
@@ -234,9 +247,29 @@ height: 100px;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-left: 140px;
-  position: fixed;
+  width: 90%;
 }
 
 .card {
   margin: 10px;
+}
+.box{
+  height: 120px;
+  width: 120px;
+  background-color: white;
+  border: 1px solid lightgray
+}
+.boxes{
+  margin-left: 180px;
+  display: flex;
+  gap: 10px;
+}
+.box-detail{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 28px;
+}
+.favourite-icon{
+  margin-left: 95%;
 }

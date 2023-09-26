@@ -44,7 +44,7 @@ class VehiclesController < ApplicationController
       if params[:query_params].present?
         @pagy, @results = pagy(Vehicle.where(id: PgSearch.multisearch(params[:query_params].values.reject(&:blank?)).pluck(:searchable_id)), items: 3)
       else
-        @pagy, @results = pagy(Vehicle.all.where.not(primaryContact: nil).where(status: "open"), items: 3)
+        @pagy, @results = pagy(Vehicle.open.where.not(primaryContact: nil), items: 3)
       end
     render :search
   end

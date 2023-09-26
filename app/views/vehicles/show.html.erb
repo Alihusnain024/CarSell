@@ -1,118 +1,115 @@
-<div class="single-vehicle-container">
-  <div class="single-vehicle">
-    <h1><%= @vehicle.carModel %></h1>
-    <h1><span>PKR:</span> <%= @vehicle.price %></h1>
-  </div>
-</div>
 <div class='vehicle-details'>
   <div class="left">
     <div class="left-wrapper">
-    <div class="left-container">
-  <div id="imageCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <% @vehicle.vehicle_image.each_with_index do |image, index| %>
-        <li data-target="#imageCarousel" data-slide-to="<%= index %>" <%= index.zero? ? 'class="active"' : '' %>></li>
-      <% end %>
-    </ol>
-    <div class="carousel-inner">
-      <% @vehicle.vehicle_image.each_with_index do |image, index| %>
-        <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
-          <%= image_tag image, size: '450x350', class: 'd-block w-100' %>
+      <div class="left-container">
+        <div class="favourite-icon">
+          <% if current_user %>
+            <% if current_user.favorites.exists?(vehicle_id: @vehicle.id) %>
+              <%= link_to remove_from_favorites_favourite_path(id: @vehicle.id), method: :delete, remote: true do %>
+                <i class="bi bi-heart-fill text-danger h2"></i> 
+              <% end %>
+            <% else %>
+              <%= link_to add_to_favorites_favourite_path(id: @vehicle.id), method: :post, remote: true do %>
+                <i class="bi bi-heart h2 text-black"></i> 
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
-      <% end %>
-    </div>
-    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
-
-      <div class="phone-wrapper">
-        <button class="btn btn-primary" id="showPhoneBtn">
-          <i class="fas fa-phone"></i> Show Phone
-        </button>
-        <button class="btn btn-success">
-          <i class="fas fa-envelope"></i> Send Message
-          </button>
+        <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <% @vehicle.vehicle_image.each_with_index do |image, index| %>
+              <li data-target="#imageCarousel" data-slide-to="<%= index %>" <%= index.zero? ? 'class="active"' : '' %>></li>
+            <% end %>
+          </ol>
+          <div class="carousel-inner">
+            <% @vehicle.vehicle_image.each_with_index do |image, index| %>
+              <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+                <%= image_tag image, size: '450x350', class: 'd-block w-100' %>
+              </div>
+            <% end %>
+          </div>
+          <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+            <i class="bi bi-chevron-left h3"></i>
+          </a>
+          <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+            <i class="bi bi-chevron-right h3"></i>
+          </a>
+        </div>
+      </div>
+      <div class="d-flex boxes">
+        <div class="box">
+          <div class="box-detail">
+            <i class="bi bi-fuel-pump-fill h3"></i>
+            <p> <%=@vehicle.engineType %></p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-detail">
+            <i class="bi bi-car-front-fill h3"></i>
+            <p> <%=@vehicle.carModel %></p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-detail">
+            <i class="bi bi-speedometer h3"></i>
+            <p> <%=@vehicle.mileage %></p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-detail">
+            <i class="bi bi-gear h3"></i>
+            <p> <%=@vehicle.transmissonType %></p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-detail">
+            <i class="bi bi-palette h3"></i>
+            <p> <%=@vehicle.color %></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="right">
     <div class="right-container">
-      <div class='right-row'>
-        <p>Car Model<p/>
-        <p> <%=@vehicle.carModel %></p>
-      </div>
-      <hr>
-      <div class='right-row'>
-        <p>Assembly<p/>
-        <p> <%=@vehicle.assemblyType %></p>
-      </div>
-      <hr>
-      <div class='right-row'>
-        <p>Engine Detail<p/>
-        <p> <%=@vehicle.engineType %></p>
-      </div>
-      <hr>
-      <div class='right-row'>
-        <p>Engine Capaicty<p/>
-        <p> <%=@vehicle.engineCapicity %></p>
-      </div>
-      <hr>
-      <div class='right-row'>
-        <p>Mileage<p/>
-        <p> <%=@vehicle.mileage %></p>
-      </div>
-      <hr>
-      <div class='right-row'>
-        <p>Transmission Type<p/>
-        <p> <%=@vehicle.transmissonType %></p>
-      </div>
-      <hr>
-      <div class='right-row'>
-        <p>Car Model<p/>
-        <p> <%=@vehicle.carModel %></p>
-      </div>
-      <hr>
+      <h1 class="mb-5 text-success">PKR:<%= @vehicle.price %> </h1>
+      <button
+        class="btn btn-primary mb-3 w-100"
+        data-controller="vehicles"
+        data-action="click->vehicles#showPhoneNumber"
+        data-phone-number="<%= @vehicle.primaryContact %>"
+        data-target="#phoneModal"
+        data-toggle="modal"
+      >
+        <i class="bi bi-telephone h3"></i> Show Phone
+      </button>
+      <button class="btn btn-success w-100">
+        <i class="bi bi-envelope h3"></i> Send Message
+      </button>
+    </div>
+    <div class="right-container1">
+      <p class="mb-3 text-primary"> Safety Tips for Transactions</p>
+      <p class="mb-3"> 1: Use a safe location to meet seller</p>
+      <p class="mb-3"> 2: Avoid cash Transactions</p>
+      <p class="mb-3"> 3: Beware Unrealistic Offers</p>
     </div>
   </div>
 </div>
 <div class="phone-number" style="display: none;"><%= @vehicle.primaryContact %></div>
-
-<script>
-  document.addEventListener("turbolinks:load", function() {
-    const phoneNumber = document.querySelector(".phone-number");
-    const showPhoneBtn = document.getElementById("showPhoneBtn");
-
-    showPhoneBtn.addEventListener("click", function() {
-      const phoneNumberText = phoneNumber.textContent;
-      const phoneNumberModal = document.getElementById("phoneNumber");
-      phoneNumberModal.textContent = phoneNumberText;
-
-      $('#phoneModal').modal('show');
-    });
-  });
-</script>
-
-<div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="phoneModalLabel" aria-hidden="true">
+<div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="phoneModalLabel" aria-hidden="true" data-controller="vehicles">  
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="phoneModalLabel">Phone Number</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p id="phoneNumber"></p>
+        <span id="phoneNumber"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="close-Modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

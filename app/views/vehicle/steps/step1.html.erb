@@ -5,14 +5,14 @@
       <div class="row1">
         <div class="form-group">
           <%= form.label :city %>
-          <%= form.select :city, ['lahore', 'rawalpindi', 'quetta', 'karachi', 'peshawar', 'islamabad'], prompt: 'Select City' %>
+          <%= form.select :city, Vehicle.cities.keys,  prompt: 'Select City' %>
           <% if @vehicle.errors[:city].any? %>
             <div class="text-danger"><%= "City " + @vehicle.errors[:city].join(", ") %></div>
           <% end %>  
         </div>
         <div class="form-group">
           <%= form.label :carModel %>
-          <%= form.select :carModel, ['suzuki', 'toyota', 'honda', 'bmw'], prompt: 'Select Car Model' %>
+          <%= form.select :carModel, Vehicle.carModels.keys, prompt: 'Select Car Model' %>
           <% if @vehicle.errors[:carModel].any? %>
             <div class="text-danger"><%= "car model " + @vehicle.errors[:carModel].join(", ") %></div>
           <% end %>  
@@ -21,7 +21,7 @@
       <div class="row1">
         <div class="form-group">
           <%= form.label :color %>
-          <%= form.select :color, ['black', 'white', 'gray', 'silver', 'red'], prompt: 'Select Color' %>
+          <%= form.select :color, Vehicle.colors.keys, prompt: 'Select Color' %>
           <% if @vehicle.errors[:color].any? %>
             <div class="text-danger"><%= "color " + @vehicle.errors[:color].join(", ") %></div>
           <% end %>  
@@ -37,7 +37,7 @@
       <div class="row1">
         <div class="form-group">
           <%= form.label :engineType %>
-          <%= form.select :engineType, ['petrol', 'diesel', 'hybrid'], prompt: 'Select Engine Type' %>
+          <%= form.select :engineType, Vehicle.engineTypes.keys, prompt: 'Select Engine Type' %>
           <% if @vehicle.errors[:engineType].any? %>
             <div class="text-danger"><%= "engine type " + @vehicle.errors[:engineType].join(", ") %></div>
           <% end %>  
@@ -55,7 +55,7 @@
       <div class="row1">
         <div class="form-group">
           <%= form.label :mileage %>
-          <%= form.text_field :mileage, class: 'form-control h-40' %>
+          <%= form.text_field :mileage, class: 'form-control1 h-40' %>
           <% if @vehicle.errors[:mileage].any? %>
             <div class="text-danger"><%= "mileage " + @vehicle.errors[:mileage].join(", ") %></div>
           <% end %>  
@@ -63,7 +63,7 @@
 
         <div class="form-group">
           <%= form.label :price %>
-          <%= form.text_field :price, class: 'form-control h-40' %>
+          <%= form.text_field :price, class: 'form-control1 h-40' %>
           <% if @vehicle.errors[:price].any? %>
             <div class="text-danger"><%= "price " + @vehicle.errors[:price].join(", ") %></div>
           <% end %>  
@@ -73,7 +73,7 @@
         <div class="margin-left">
           <div class="form-group">
             <%= form.label :assemblyType %>
-            <%= form.select :assemblyType, ['local', 'imported'], prompt: 'Select Assembly Type' %>
+            <%= form.select :assemblyType, Vehicle.assemblyTypes.keys, prompt: 'Select Assembly Type' %>
             <% if @vehicle.errors[:assemblyType].any? %>
               <div class="text-danger"><%= "assembly type " + @vehicle.errors[:assemblyType].join(", ") %></div>
             <% end %>  

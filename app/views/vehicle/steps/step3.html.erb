@@ -1,50 +1,21 @@
 <div class="vehicle-wrapper">
-  <div class="vehicle-form">
-  <%= render "shared/statusbar" %>
-    <%= form_with(model: @vehicle, url: wizard_path) do |form| %>
+  <div class="vehicle-form" data-controller="vehicle-form">
+    <%= render "shared/statusbar" %>
+    <%= form_with(model: @vehicle, url: wizard_path, html: { id: 'vehicle-form', "data-action": "vehicle-form#onSubmit" }) do |form| %>
       <div class="row">
         <div class="form-group">
           <%= form.label :vehicle_image %>
-          <%= form.file_field :vehicle_image, class: 'image-upload', multiple: true %>
+          <%= form.file_field :vehicle_image, class: 'image-upload', multiple: true, "data-action": "vehicle-form#onImageChange" %>
           <div class="image-preview">
             <img id="image-preview" src="#" alt="Selected Image" style="display: none;">
-            <span class="remove-image" style="display: none;">&times;</span>
+            <span class="remove-image" style="display: none;" data-action="vehicle-form#onRemoveImage">&times;</span>
           </div>
         </div>
       </div>
       <div>
         <%= link_to 'Back', previous_wizard_path, class: 'btn btn-secondary' %>
-        <%= form.submit 'Submit', class: 'btn btn-primary' %>
+        <%= form.submit 'Submit', class: 'btn btn-primary', id: 'submit-button', disabled: true %>
       </div>
     <% end %>
   </div>
 </div>
-
-<script>
-  document.querySelector('.image-upload').addEventListener('change', function() {
-    const imagePreview = document.getElementById('image-preview');
-    const removeImage = document.querySelector('.remove-image');
-
-    if (this.files && this.files[0]) {
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = 'block';
-        removeImage.style.display = 'block';
-      };
-
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
-
-  document.querySelector('.remove-image').addEventListener('click', function() {
-    const imagePreview = document.getElementById('image-preview');
-    const removeImage = document.querySelector('.remove-image');
-    const imageUpload = document.querySelector('.image-upload');
-
-    imagePreview.style.display = 'none';
-    removeImage.style.display = 'none';
-    imageUpload.value = ''; 
-  });
-</script>

@@ -5,14 +5,14 @@
       <div class="row">
         <div class="form-group">
           <%= form.label :primaryContact %>
-          <%= form.text_field :primaryContact, class: 'form-control' %>
+          <%= form.text_field :primaryContact, class: 'form-control1' %>
           <% if @vehicle.errors[:primaryContact].any? %>
             <div class="text-danger"><%= "Primary Contact " + @vehicle.errors[:primaryContact].join(", ") %></div>
           <% end %>  
         </div>
         <div class="form-group">
           <%= form.label :secondaryContact %>
-          <%= form.text_field :secondaryContact, class: 'form-control' %>
+          <%= form.text_field :secondaryContact, class: 'form-control1' %>
           <% if @vehicle.errors[:secondaryContact].any? %>
             <div class="text-danger"><%= "Secondary Contact " + @vehicle.errors[:secondaryContact].join(", ") %></div>
           <% end %>  
