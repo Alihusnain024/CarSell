@@ -5,8 +5,8 @@
       <div class="row">
         <div class="form-group">
           <%= form.label :vehicle_image %>
-          <%= form.file_field :vehicle_image, id: 'image-upload', multiple: true %>
-          <div id="image-preview-container" style="display: flex; flex-wrap: wrap; margin-top: 40px"></div>
+          <%= form.file_field :vehicle_image, id: 'image-upload', multiple: true, accept: 'image/jpeg, image/jpg, image/png' %>
+          <div id="image-preview-container" style="display: flex; flex-wrap: wrap; margin-top: 40px; margin-left:20px; gap:20px;"></div>
           </div>
       </div>
       <div>

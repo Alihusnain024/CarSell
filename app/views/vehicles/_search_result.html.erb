@@ -1,4 +1,8 @@
-<% @results.each do |vehicle| %>
+<div class="search-table">
+  <% if @results.empty? %>
+    <p style=" font-size: 30px; font-weight: bold; text-align: center;">No vehicle found</p>
+  <% else %>
+  <% @results.each do |vehicle| %>
   <div class="list-container">
     <div class="card">
       <div class="card-body" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
@@ -8,7 +12,7 @@
           <img src="<%= vehicle.vehicle_image %>" class="card-img" alt="Vehicle Image" style="width: 100px; height: 100px; margin-right: 10px;">
         <% end %>
         <div>
-          <h5 class="card-title"><%= vehicle.carModel %></h5>
+          <h5 class="card-title"><%= vehicle.carModel.capitalize %></h5>
           <p class="card-text"><%= vehicle.price %> PKR</p>
           <% if current_user %>
             <% if current_user.favorites.exists?(vehicle_id: vehicle.id) %>
@@ -26,4 +30,5 @@
       </div>
     </div>
   </div>
+<% end %>
 <% end %>

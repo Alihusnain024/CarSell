@@ -1,3 +1,11 @@
+<div>
+  <div class="favorite-title">
+    <h1 style="text-align: center;">My Ads</h1>
+  </div>
+</div>
+<% if @vehicles.empty? %> 
+  <p style=" font-size: 30px; font-weight: bold; text-align: center;"> You do not have any ad</p>
+    <% else %>
 <div class="posts">
     <% @vehicles.each do |vehicle| %>
       <div class="list-container">
@@ -9,7 +17,7 @@
               <img src="<%= vehicle.vehicle_image %>" class="card-img" alt="Vehicle Image" style="width: 100px; height: 100px; margin-right: 10px;">
             <% end %>
             <div>
-              <h5 class="card-title"><%= vehicle.carModel %></h5>
+              <h5 class="card-title"><%= vehicle.carModel.capitalize %></h5>
               <p class="card-text">PKR: <%= vehicle.price %></p>
               <%= link_to 'Edit', edit_vehicle_path(vehicle), class: 'btn btn-primary' %>
               <%= link_to 'Delete', vehicle_path(vehicle), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
@@ -22,6 +30,7 @@
           </div>
         </div>
       </div>
+    <% end %>
     <% end %>
 </div>
 

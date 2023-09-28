@@ -4,6 +4,9 @@
   </div>
 </div>
 <div class="card-container">
+<% if @favorite_vehicles.empty? %> 
+  <p style=" font-size: 30px; font-weight: bold; text-align: center; margin: auto;"> You do not have any Favorites yet</p>
+    <% else %>
   <% @favorite_vehicles.each do |favorite| %>
     <div class="card" style="width: 18rem;">
       <%= image_tag favorite.vehicle.vehicle_image.first, size: '287x150', style: 'object-fit: cover;' %>
@@ -19,6 +22,7 @@
         <% end %>
       </div>
     </div>
+  <% end %>
   <% end %>
 </div>
 <div class="pagy_nav_bootstrap" style="margin-left: 40%; margin-top:20%; margin-bottom:30px;">

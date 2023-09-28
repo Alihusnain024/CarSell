@@ -94,6 +94,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.2)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -251,6 +252,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise (~> 4.9)
   font-awesome-sass
+  interactor
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)

@@ -1,19 +1,24 @@
 class Vehicle::StepsController < ApplicationController
   include Wicked::Wizard
+  before_action :authenticate_user!
+  before_action :find_vehicle, only: [:show, :update]
+
   steps *Vehicle.form_steps
 
   def show
-    @vehicle = Vehicle.find(params[:vehicle_id])
     render_wizard
   end
 
   def update
-    @vehicle = Vehicle.find(params[:vehicle_id])
     @vehicle.update(vehicle_params(step))
     render_wizard @vehicle
   end
 
   private
+
+  def find_vehicle
+    @vehicle = Vehicle.find(params[:vehicle_id])
+  end
 
   def vehicle_params(step)
   	permitted_attributes = case step

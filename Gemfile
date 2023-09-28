@@ -15,6 +15,8 @@ gem 'puma', '~> 5.0'
 gem 'wicked'
 # Pegy Gem
 gem 'pagy'
+# Interactor
+gem 'interactor'
 # Letter Opener
 gem "letter_opener", group: :development
 # Use SCSS for stylesheets

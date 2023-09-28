@@ -6,9 +6,9 @@
         <div class="form-group">
           <%= form.label :city %>
           <%= form.select :city, Vehicle.cities.keys,  prompt: 'Select City' %>
-          <% if @vehicle.errors[:city].any? %>
-            <div class="text-danger"><%= "City " + @vehicle.errors[:city].join(", ") %></div>
-          <% end %>  
+          <span class="text-danger">
+           <%= @vehicle.errors[:city].to_sentence %>
+          </span>
         </div>
         <div class="form-group">
           <%= form.label :carModel %>

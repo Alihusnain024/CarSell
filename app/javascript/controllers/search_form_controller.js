@@ -1,26 +1,40 @@
-
 import { Controller } from "stimulus";
+import $ from "jquery"; 
 
 export default class extends Controller {
-  initialize() {
-    this.originalHeight = this.element.offsetHeight;
-    this.expanded = true;
+  connect() {
+    this.showMoreButton = this.element.querySelector(".btn.btn-secondary.m-1");
 
-    this.showMoreButton = document.querySelector(".btn.btn-secondary.m-1");
-  }
-  toggleFilters() {
-    this.expanded = !this.expanded;
-    const filterRows = document.getElementById("filterRows");
-
-    if (this.expanded) {
-      this.showMoreButton.innerText = "Show Less";
-      this.element.style.height = this.originalHeight + "px";
-      filterRows.classList.add("show");
+    const previousState = localStorage.getItem("buttonState");
+    if (previousState === "expanded") {
+      this.expandFilters();
     } else {
-      this.showMoreButton.innerText = "Show More";
-      this.element.style.height = "230px";
-      filterRows.classList.remove("show");
+      this.collapseFilters();
     }
+
+    this.showMoreButton.addEventListener("click", () => {
+      if (this.expanded) {
+        this.collapseFilters();
+      } else {
+        this.expandFilters();
+      }
+    });
+  }
+
+  expandFilters() {
+    this.showMoreButton.innerText = "Show Less";
+    localStorage.setItem("buttonState", "expanded");
+    filterRows.classList.add("show");
+    this.element.style.height = "370px";
+    this.expanded = true;
+  }
+
+  collapseFilters() {
+    this.showMoreButton.innerText = "Show More";
+    localStorage.setItem("buttonState", "collapsed");
+    this.element.style.height = "230px";
+    filterRows.classList.remove("show");
+    this.expanded = false;
   }
 
   clearFilters() {

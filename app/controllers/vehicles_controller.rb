@@ -1,13 +1,12 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :close]
   before_action :authenticate_user!, except: [:search]  
   
   def index
-   @pagy, @vehicles = pagy(current_user.vehicles.where.not(primaryContact: nil), items:3)
+   @pagy, @vehicles = pagy(Vehicle.user_ads(current_user), items:3)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @vehicle = current_user.vehicles.new
@@ -32,25 +31,19 @@ class VehiclesController < ApplicationController
   end
 
   def destroy
-    @vehicle = Vehicle.find(params[:id])
-    Favorite.where(vehicle_id: @vehicle.id).destroy_all
-    @vehicle.destroy
+    return unless Favorite.where(vehicle_id: @vehicle.id).destroy_all && @vehicle.destroy
     redirect_to vehicles_url, notice: 'Vehicle was successfully destroyed.'
   end
   
-  
-
   def search
-      if params[:query_params].present?
-        @pagy, @results = pagy(Vehicle.where(id: PgSearch.multisearch(params[:query_params].values.reject(&:blank?)).pluck(:searchable_id)), items: 3)
-      else
-        @pagy, @results = pagy(Vehicle.open.where.not(primaryContact: nil), items: 3)
-      end
-    render :search
+    @pagy, @results = pagy(Vehicle.search_results(params[:query_params]), items: 3)
+    respond_to do |format|
+      format.html 
+      format.js   
+    end
   end
-
+  
   def close
-    @vehicle = Vehicle.find(params[:id]) 
     @vehicle.update(status: 'close') 
     redirect_to vehicles_path, notice: 'Vehicle status has been set to close.'
   end

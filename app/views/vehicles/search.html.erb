@@ -26,13 +26,14 @@
       Show less
     </button>
           <div class='d-flex justify-content-end'>
-        <%= form.submit 'Search', class: 'btn btn-primary m-1' %>
+        <%= form.submit 'Search', class: 'btn btn-primary m-1', remote: true, data: { turbolinks: false } %>
         <button type="button" class="btn btn-secondary m-1 btn-clear-filters" data-action="search-form#clearFilters" >Clear Filters</button>
       </div>
     <% end %>
   </div>
-
+<div class="search-table">
  <%= render "search_result" %>
+ </div>
  <div class="pagy_nav_bootstrap" style="margin-left: 200px; margin-top:30px; margin-bottom:30px;">
  <%= pagy_bootstrap_nav(@pagy).html_safe %>
  </div>

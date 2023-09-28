@@ -7,22 +7,29 @@
       <li class="nav-item">
         <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
-      <li class="nav-item">
-        <%= link_to "Favorites", favourites_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "My Ads", vehicles_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= button_to "Post Ad", vehicles_path, method: :post, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
       <% if user_signed_in? %>
-        <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link' %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: 'nav-link' %>
+      <li class="nav-item">
+          <%= link_to "Favorites", favourites_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+          <%= link_to "My Ads", vehicles_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+          <%= button_to "Post Ad", vehicles_path, method: :post, class: 'nav-link' %>
+      </li>
       <% end %>
-    </li>    
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: 'nav-link' %>
+        <% end %>
+      </li>
+      <% unless user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "Signup", new_user_registration_path, class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

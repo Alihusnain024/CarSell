@@ -26,7 +26,7 @@ export default class extends Controller {
           const imagePreview = document.createElement("div");
           imagePreview.classList.add("image-preview-item");
           imagePreview.innerHTML = `
-            <img src="${e.target.result}" alt="Selected Image">
+            <img src="${e.target.result}" alt="Selected Image" style="height: 130px; width: 150px; margin-bottom: 20px;" >
             <span class="remove-image" data-file="${file.name}">&times;</span>
           `;
           imagePreviewContainer.appendChild(imagePreview);
