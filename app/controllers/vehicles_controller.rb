@@ -20,16 +20,18 @@ class VehiclesController < ApplicationController
 
   def edit
     redirect_to vehicle_step_path(@vehicle, :step1)
-  end
 
+  end
+  
   def update
+    
     if @vehicle.update(vehicle_params)
       redirect_to @vehicle, notice: 'Vehicle was successfully updated.'
     else
       render :edit
     end
   end
-
+  
   def destroy
     return unless Favorite.where(vehicle_id: @vehicle.id).destroy_all && @vehicle.destroy
     redirect_to vehicles_url, notice: 'Vehicle was successfully destroyed.'

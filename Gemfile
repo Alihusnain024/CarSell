@@ -15,8 +15,12 @@ gem 'puma', '~> 5.0'
 gem 'wicked'
 # Pegy Gem
 gem 'pagy'
+# Pundit Gem
+gem 'pundit'
 # Interactor
 gem 'interactor'
+# Rubocop
+gem 'rubocop-rails', require: false
 # Letter Opener
 gem "letter_opener", group: :development
 # Use SCSS for stylesheets
