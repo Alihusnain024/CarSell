@@ -1,0 +1,30 @@
+<div>
+  <div class="favorite-title">
+    <h1 style="text-align: center;">My Favorite Vehicles</h1>
+  </div>
+</div>
+<div class="card-container">
+<% if @favorite_vehicles.empty? %> 
+  <p style=" font-size: 30px; font-weight: bold; text-align: center; margin: auto;"> You do not have any Favorites yet</p>
+    <% else %>
+  <% @favorite_vehicles.each do |favorite| %>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag favorite.vehicle.vehicle_image.first, size: '287x150', style: 'object-fit: cover;' %>
+      <div class="card-body">
+        <h5 class="card-title"><%= favorite.vehicle.carModel %></h5>
+        <p class="card-text"><%= favorite.vehicle.price %> PKR</p>
+        <% if current_user %>
+          <% if current_user.favorites.exists?(vehicle_id: favorite.vehicle.id) %>
+            <%= link_to remove_from_favorites_favourite_path(id: favorite.vehicle.id), method: :delete, remote: true do %>
+              <i class="bi bi-heart-fill text-danger h2"></i> 
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% end %>
+</div>
+<div class="pagy_nav_bootstrap" style="margin-left: 40%; margin-top:20%; margin-bottom:30px;">
+<%= pagy_bootstrap_nav(@pagy).html_safe %>
+</div>

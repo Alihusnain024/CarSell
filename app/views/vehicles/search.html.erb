@@ -1,0 +1,37 @@
+<div class="home-container" data-controller="search-form">
+  <div>
+  <%= form_tag search_vehicles_path, method: :get, id: 'search-form', remote: true do %>
+    <div class="row2">
+      <%= select_tag "query_params[car_model]", options_for_select(Vehicle.carModels.keys, params.dig('query_params', 'car_model')), prompt: 'Select Car Model' %>
+      <%= select_tag "query_params[city]", options_for_select(Vehicle.cities.keys, params.dig('query_params', 'city')), prompt: 'Select City' %>
+      <%= select_tag "query_params[price]", options_for_select([["1000000", "price1"], ["2000000", "price2"], ["3000000", "price3"]], params.dig('query_params', 'price')), prompt: 'Select Price Range' %>
+    </div>
+    <div id="filterRows" class="collapse show">
+      <div class="row2">
+        <%= select_tag "query_params[engine_type]", options_for_select(Vehicle.engineTypes.keys, params.dig('query_params', 'engine_type')), prompt: 'Engine Details' %>
+        <%= select_tag "query_params[transmisson_type]", options_for_select([["manual", "manual"], ["automatic", "automatic"]], params.dig('query_params', 'transmisson_type')), prompt: 'Transmission Type' %>
+        <%= select_tag "query_params[color]", options_for_select(Vehicle.colors.keys, params.dig('query_params', 'color')), prompt: 'Color' %>
+      </div>
+      <div class="row2">
+        <%= select_tag "query_params[mileage]", options_for_select([["10", "mileage1"], ["15", "mileage2"], ["20", "mileage3"]], params.dig('query_params', 'mileage')), prompt: 'Select Mileage' %>
+        <%= select_tag "query_params[engine_capacity]", options_for_select([["1.0L", "e1"], ["2.0L", "e2"], ["3.0L", "e3"]], params.dig('query_params', 'engine_capacity')), prompt: 'Engine Capacity' %>
+        <%= select_tag "query_params[assembly_type]", options_for_select(Vehicle.assemblyTypes.keys, params.dig('query_params', 'assembly_type')), prompt: 'Assembly Type' %>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary m-1" data-action="search-form#toggleFilters">Show less</button>
+    <div class='d-flex justify-content-end'>
+      <%= submit_tag 'Search', class: 'btn btn-primary m-1', data: { turbolinks: false } %>
+      <button type="button" class="btn btn-secondary m-1 btn-clear-filters" data-action="search-form#clearFilters">Clear Filters</button>
+    </div>
+  <% end %>
+  
+  </div>
+<div class="search-table">
+ <%= render "search_result" %>
+ </div>
+</div>
+
+
+
+
+
