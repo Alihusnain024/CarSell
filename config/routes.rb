@@ -17,8 +17,27 @@ Rails.application.routes.draw do
       delete 'remove_from_favorites'
     end
   end
+
+  namespace :api do
+    post :auth, to: "authentication#create"
+    delete :auth, to: "authentication#destroy"
+    resources :vehicles do 
+      resources :steps, only: [:show, :update], controller: 'vehicle/steps'
+      collection do
+        get 'search'
+      end                                                                 
+      member do
+        put 'close'
+      end
+    end
   
-  
-  
+    resources :favourites, only: [:index, :create, :destroy] do
+      member do
+        post 'add_to_favorites'
+        delete 'remove_from_favorites'
+      end
+    end
+    
+  end
 
 end

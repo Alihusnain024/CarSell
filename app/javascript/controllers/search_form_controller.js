@@ -3,7 +3,6 @@ export default class extends Controller {
   initialize() {
     this.originalHeight = this.element.offsetHeight;
     this.expanded = true;
-
     this.showMoreButton = document.querySelector(".btn.btn-secondary.m-1");
   }
   toggleFilters() {
@@ -20,7 +19,6 @@ export default class extends Controller {
       filterRows.classList.remove("show");
     }
   }
-
   clearFilters() {
     const form = document.getElementById("search-form");
     form.querySelectorAll("select").forEach((select) => {
