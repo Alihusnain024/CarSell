@@ -1,0 +1,90 @@
+<% if user_signed_in? %>
+  <%= render 'shared/navbar' %> 
+<div class="vehicle-container">
+<h1 class="post-ad">Post Ad</h1>
+</div>
+<div class="vehicle-wrapper">
+<div class="vehicle-form">
+
+<%= form_with(model: @vehicle, url: vehicle_path(@vehicle)) do |form| %>
+  <div class="row1">
+  <div class="form-group">
+    <%= form.label :city %>
+    <%= form.select :city, ['lahore', 'rawalpindi', 'quetta', 'karachi', 'peshawar', 'islamabad'], prompt: 'Select City' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :carModel %>
+    <%= form.select :carModel, ['suzuki', 'toyota', 'honda', 'bmv'], prompt: 'Select Car Model' %>
+  </div>
+  </div>
+<div class="row1">
+  <div class="form-group">
+    <%= form.label :color %>
+    <%= form.select :color, ['black', 'white', 'gray', 'silver', 'red'], prompt: 'Select Color' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :engineCapicity %>
+    <%= form.select :engineCapicity, ['1.0L', '1.5L', '2.0L', '2.5L'], prompt: 'Select Engine Capacity' %>
+  </div>
+  </div>
+<div class="row1">
+  <div class="form-group">
+    <%= form.label :engineType %>
+    <%= form.select :engineType, ['petrol', 'diesel', 'hybrid'], prompt: 'Select Engine Type' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :transmissonType %>
+    <%= form.select :transmissonType, ['Manual', 'Automatic'], prompt: 'Select Transmission Type' %>
+  </div>
+  </div>
+
+<div class="row1">
+  <div class="form-group">
+  <%= form.label :mileage %>
+  <%= form.text_field :mileage, class: 'form-control h-40' %>
+</div>
+
+<div class="form-group">
+  <%= form.label :price %>
+  <%= form.text_field :price, class: 'form-control h-40' %>
+</div>
+</div>
+<div >
+<div class="row1">
+  <div class="form-group">
+  <%= form.label :primaryContact %>
+  <%= form.text_field :primaryContact, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= form.label :secondaryContact %>
+  <%= form.text_field :secondaryContact, class: 'form-control' %>
+</div>
+</div>
+<div class="margin-left">
+  <div class="form-group">
+    <%= form.label :assemblyType %>
+    <%= form.select :assemblyType, ['local', 'imported'], prompt: 'Select Assembly Type' %>
+  </div>
+  
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4 %>
+  </div>
+  </div>
+  <%= form.submit 'Next', class: 'button btn btn-primary ' %>
+
+
+<% end %>
+</div>
+
+
+
+<div/>
+<% else %>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+<% end %>

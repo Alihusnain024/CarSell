@@ -153,3 +153,6 @@ select:focus {
   height: 100vh;
   background-color: #A6C8E1;
 }
+.card-body{
+  width: 750px;
+}

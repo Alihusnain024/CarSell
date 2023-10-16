@@ -4,7 +4,7 @@ class VehiclesController < ApplicationController
 
 
   def index
-    @vehicles = current_user.vehicles.where.not(primaryContact: nil)
+   @pagy, @vehicles = pagy(current_user.vehicles.where.not(primaryContact: nil), items:5)
   end
 
   def show
@@ -21,6 +21,7 @@ class VehiclesController < ApplicationController
   end
 
   def edit
+    redirect_to vehicle_step_path(@vehicle, :step1)
   end
 
   def update
@@ -43,6 +44,19 @@ class VehiclesController < ApplicationController
   end
 
   def vehicle_params
-    params.require(:vehicle).permit(:city, :mileage, :carModel, :price, :engineType, :transmissonType, :engineCapicity, :color, :assemblyType, :description, :primaryContact, :secondaryContact)
+    params.require(:vehicle).permit(
+      :city,
+      :mileage,
+      :carModel,
+      :price,
+      :engineType,
+      :transmissonType, 
+      :engineCapicity, 
+      :color, 
+      :assemblyType, 
+      :description, 
+      :primaryContact, 
+      :secondaryContact
+    )
   end
 end
