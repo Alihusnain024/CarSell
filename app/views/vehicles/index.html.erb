@@ -1,0 +1,55 @@
+<% if user_signed_in? %>
+  <%= render 'shared/navbar' %> 
+<div class="user-form col-sm-6">
+  <table class="table table-bordered" style="margin-left: 50px; margin-top: 20px; width:185%">
+    <thead>
+      <tr>
+      <th scope="col">Id</th>
+        <th scope="col">City</th>
+        <th scope="col">Mileage</th>
+        <th scope="col">Car Model</th>
+        <th scope="col">Color</th>
+        <th scope="col">Engine Capacity</th>
+        <th scope="col">Assembly Type</th>
+        <th scope="col">Transmission Type</th>
+        <th scope="col">Engine Type</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th> 
+
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @vehicles.each do |vehicle| %>
+        <tr>
+        <td><%= vehicle.id %></td>
+          <td><%= vehicle.city %></td>
+          <td><%= vehicle.mileage %></td>
+          <td><%= vehicle.carModel %></td>
+          <td><%= vehicle.color %></td>
+          <td><%= vehicle.engineCapicity %></td>
+          <td><%= vehicle.assemblyType %></td>
+          <td><%= vehicle.transmissonType %></td>
+          <td><%= vehicle.engineType %></td>          
+          <td><%= vehicle.price %></td>
+          <td><%= vehicle.description%></td>
+          
+<td>
+          <button type="button" class="btn btn-primary">Edit</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-secondary">Close</button>
+          </td>
+
+
+
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <p>Please <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> or <%=link_to "Login", new_user_session_path, :class => 'navbar-link' %></p>
+<% end %>
