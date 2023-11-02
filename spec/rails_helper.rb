@@ -61,6 +61,15 @@ RSpec.configure do |config|
 
   # Include shoulda-matchers module
   config.include Shoulda::Matchers::ActiveModel
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :active_record
+    end
+  end
 
   # Include Devise modules for testing controllers and views
   config.include Devise::Test::ControllerHelpers, type: :controller

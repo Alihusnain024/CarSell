@@ -44,6 +44,36 @@ class VehiclesController < ApplicationController
     redirect_to vehicles_path, notice: 'Vehicle status has been set to close.'
   end
 
+  def payment
+    @vehicle = Vehicle.find(params[:id])
+  end
+
+  def process_payment
+    @vehicle = Vehicle.find(params[:id])
+  
+    begin
+      customer = Stripe::Customer.create({
+        email: params[:stripeEmail],
+        source: params[:stripeToken]
+      })
+  
+      charge = Stripe::Charge.create({
+        customer: customer.id,
+        amount: @vehicle.price * 100,
+        description: "Payment for Vehicle: " + @vehicle.carModel,
+        currency: "pkr"
+      })
+  
+      flash[:notice] = 'Payment successful'
+      redirect_to @vehicle
+  
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to payment_vehicle_path(@vehicle)
+    end
+  end
+  
+
   private
 
   def set_vehicle

@@ -8,19 +8,14 @@ class FavouritesController < ApplicationController
   
 
   def add_to_favorites
-    if current_user.favorites.create(vehicle: @vehicle)
-      redirect_back(fallback_location: root_path, notice: 'Added to favorites')
-    else
-      redirect_back(fallback_location: root_path, alert: 'Failed to add to favorites')
-    end
+     current_user.favorites.create(vehicle: @vehicle)
+     redirect_back(fallback_location: root_path, notice: 'Added to favorites')
+   
   end
   
   def remove_from_favorites  
-    if current_user.favorites.find_by(vehicle: @vehicle).destroy
-      redirect_back(fallback_location: root_path, notice: 'Removed from favorites')
-    else
-      redirect_back(fallback_location: root_path, alert: 'Failed to remove from favorites')
-    end
+    current_user.favorites.find_by(vehicle: @vehicle).destroy
+    redirect_back(fallback_location: root_path, notice: 'Removed from favorites')
   end
 
   private

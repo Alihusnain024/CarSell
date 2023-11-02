@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "vehicles#search"
+  
+  resources :lists, only: [:index, :create]
+  resources :payments, only: [:new, :create]
+  get 'payment_success', to: 'payments#create', as: 'payment_success'
+  get 'payment_cancel', to: 'payments#new', as: 'payment_cancel'
+
+  
   resources :vehicles do 
     resources :steps, only: [:show, :update], controller: 'vehicle/steps'
     collection do
@@ -8,6 +15,9 @@ Rails.application.routes.draw do
     end
     member do
       put 'close'
+      get 'payment'
+      post 'process_payment'
+      
     end
   end
 

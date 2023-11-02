@@ -1,0 +1,14 @@
+
+<div data-controller="list" data-list-lists="<%= @lists.to_json %>">
+<%= form_with(model: @list_item, class: "mb-7") do |form| %>
+  <div class="mb-5">
+    <%= form.text_field :text, placeholder: "Add new List" %>
+    <%= form.submit "Add List" %>
+  </div>
+<% end %>
+ <ul data-list-target="taskList">
+   
+  </ul>
+</div>
+
+

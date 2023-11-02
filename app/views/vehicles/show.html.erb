@@ -83,9 +83,16 @@
       >
         <i class="bi bi-telephone h3"></i> Show Phone
       </button>
-      <button class="btn btn-success w-100">
-        <i class="bi bi-envelope h3"></i> Send Message
-      </button>
+      <%= form_tag process_payment_vehicle_path do %>
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Pay Amount"
+          data-amount=<%=@vehicle.price %>
+          data-locale="auto">
+        </script>
+      <% end %>
+
     </div>
     <div class="right-container1">
       <p class="mb-3 text-primary"> Safety Tips for Transactions</p>
@@ -114,3 +121,5 @@
     </div>
   </div>
 </div>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+

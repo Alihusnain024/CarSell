@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy 
 
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
-  validates_format_of :username, with: /\A[\w\-]+\z/, message: "can only contain letters, numbers, underscores, and dashes"
+  validates :email, presence: true
   validates :password, presence: true, length: { minimum: 8, message: "Minimum 8 characters required" }
   
  
